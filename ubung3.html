@@ -1,0 +1,64 @@
+
+<!------------------Übung 3
+     Erstelle ein Array mit 
+Obstnamen
+✓ Erstelle einen localStorage
+KEY mit dem Namen 
+„menge“
+✓ Erstelle eine klassische for Schleife und laufe das Array 
+durch
+✓ Schreibe jedes Array Eintrag in den lokalen 
+Speicher mit dem KEY 
+„eintrag-X“. Das X steht für 
+die Position im Array
+✓ Schreibe in den 
+localStorage-KEY „menge“ 
+die length des Arrays
+✓ Lese die localStorage-Key 
+„menge“ aus
+✓ Lese in einer klassischen 
+for-Schleife alle Einträge 
+aus dem localStorage und 
+gib sie auf der Konsole aus
+    ----------------->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Übung 3</title>
+  </head>
+  <body>
+    <main></main>
+  </body>
+  <script>
+    const m = document.getElementsByTagName("main")[0];
+    // Array mit Obstnamen
+    const obstArray = ["Apfel", "Banane", "Orange", "Erdbeere"];
+
+    // Erstelle einen localStorage-Key mit dem Namen "menge"
+    localStorage.setItem("menge", obstArray.length);
+
+    // Klassische for-Schleife, um das Array zu durchlaufen
+    for (let i = 0; i < obstArray.length; i++) {
+      const key = `eintrag-${i}`; // Key für den aktuellen Eintrag
+      const eintrag = obstArray[i]; // Der aktuelle Eintrag im Array
+
+      // Schreibe den aktuellen Eintrag in den localStorage
+      localStorage.setItem(key, eintrag);
+    }
+
+    // Lese die localStorage-Key "menge" aus
+    const menge = localStorage.getItem("menge");
+    m.innerHTML += `Die Menge im localStorage beträgt: ${menge}<br>`;
+
+    // Lese in einer klassischen for-Schleife alle Einträge aus dem localStorage und gib sie auf der Konsole aus
+    for (let i = 0; i < obstArray.length; i++) {
+      const key = `eintrag-${i}`;
+      const eintrag = localStorage.getItem(key);
+      m.innerHTML += `Eintrag ${i}: ${eintrag}<br>`;
+    }
+  </script>
+</html>

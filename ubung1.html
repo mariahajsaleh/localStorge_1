@@ -1,0 +1,33 @@
+<!--------------------- Übung 1
+    Erstelle einen localStorage Key mit dem Namen „Info“
+✓ Schreibe in den KEY „Info“ den Wert „Das ist ein Text“
+✓ Lese den Wert von KEY „Info“ aus und gib sie auf der Konsole aus
+
+    -------------->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Übung 1</title>
+</head>
+
+<body>
+    <main></main>
+</body>
+<script>
+    const m = document.getElementsByTagName("main")[0];
+    // Schreibe den Wert in den localStorage
+    localStorage.setItem("Info", "Das ist ein Text");
+
+    // Lese den Wert aus dem localStorage
+    const infoWert = localStorage.getItem("Info");
+
+    // Gib den Wert auf der Konsole aus
+    console.log(infoWert);
+</script>
+
+</html>

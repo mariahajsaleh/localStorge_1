@@ -1,0 +1,112 @@
+<!---------- Übung 5
+    Erweitere die Übung 4 so, 
+dass du mehrere 
+Personendaten in den 
+localStorage schreiben 
+kannst
+✓ Und alle Personendaten 
+müssen in den DIV jeweils 
+in einem Paragraphen 
+geladen werden können.
+
+    --------->
+
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Übung 5</title>
+</head>
+
+<body>
+  <h1>Benutzerinformationen</h1>
+  <!-- Input-Felder für Vorname, Nachname, Geburtsdatum und Augenfarbe -->
+  <label for="vorname">Vorname:</label>
+  <input type="text" id="vorname" /><br />
+
+  <label for="nachname">Nachname:</label>
+  <input type="text" id="nachname" /><br />
+
+  <label for="geburtsdatum">Geburtsdatum:</label>
+  <input type="date" id="geburtsdatum" /><br />
+
+  <label for="augenfarbe">Augenfarbe:</label>
+  <input type="color" id="augenfarbe" /><br />
+
+  <!-- Speichern-Button -->
+  <button onclick="hochladen()">Speichern</button>
+
+  <!-- Anzeige-DIV für die gespeicherten Informationen -->
+  <div id="anzeige"></div>
+
+  <script>
+    // Funktion zum Speichern der Daten in den localStorage
+    function hochladen() {
+      // Daten aus den Input-Feldern erfassen
+      const vorname = document.getElementById("vorname").value;
+      const nachname = document.getElementById("nachname").value;
+      const geburtsdatum = document.getElementById("geburtsdatum").value;
+      const augenfarbe = document.getElementById("augenfarbe").value;
+
+      // Ein JSON-Objekt erstellen
+      const benutzerInfo = {
+        Vorname: vorname,
+        Nachname: nachname,
+        Geburtsdatum: geburtsdatum,
+        Augenfarbe: augenfarbe
+      };
+
+      // Gespeicherte Personendaten im localStorage abrufen (wenn vorhanden)
+      // استرداد البيانات الشخصية المحفوظة في التخزين المحلي (إن وجد)
+      const gespeicherteDatenJSON = localStorage.getItem("gespeicherteDaten");
+      const gespeicherteDaten = gespeicherteDatenJSON
+        ? JSON.parse(gespeicherteDatenJSON)
+        : [];
+// أضف بيانات جديدة إلى المصفوفة
+      // Neue Daten zum Array hinzufügen
+      gespeicherteDaten.push(benutzerInfo);
+
+      // احفظ البيانات المحدثة مرة أخرى في localStorage
+      // Aktualisierte Daten wieder im localStorage speichern
+      // تحويل كائن JSON إلى سلسلة وتخزينه في localStorage
+      // JSON-Objekt in einen String umwandeln und im localStorage speichern
+      localStorage.setItem(
+        "gespeicherteDaten",
+        JSON.stringify(gespeicherteDaten)
+      );
+
+      // Anzeige aktualisieren
+      zeigeBenutzerInfo();
+    }
+    // وظيفة لعرض المعلومات المخزنة من التخزين المحلي
+    // Funktion zum Anzeigen der gespeicherten Informationen aus dem localStorage
+    function zeigeBenutzerInfo() {
+
+      // قراءة كائن JSON من localStorage وتحويله إلى كائن JavaScript
+      // JSON-Objekt aus dem localStorage lesen und in ein JavaScript-Objekt umwandeln
+      const gespeicherteDatenJSON = localStorage.getItem("gespeicherteDaten");
+      if (gespeicherteDatenJSON) {
+        const gespeicherteDaten = JSON.parse(gespeicherteDatenJSON);
+        const anzeigeDiv = document.getElementById("anzeige");
+        anzeigeDiv.innerHTML = "";
+        gespeicherteDaten.forEach((benutzerInfo, index) => {
+          // Paragraph erstellen
+          const p = document.createElement("p");
+          p.textContent = `Benutzer ${index + 1}:
+                      Vorname: ${benutzerInfo.Vorname}
+                      Nachname: ${benutzerInfo.Nachname}
+                      Geburtsdatum: ${benutzerInfo.Geburtsdatum}
+                      Augenfarbe: ${benutzerInfo.Augenfarbe}`;
+          anzeigeDiv.appendChild(p);
+        });
+      }
+    }
+
+    // Beim Laden der Seite die gespeicherten Informationen anzeigen
+    window.onload = zeigeBenutzerInfo;
+  </script>
+</body>
+
+</html>

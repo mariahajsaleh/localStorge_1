@@ -1,0 +1,49 @@
+
+<!-----------------------Übung 2
+     Erstelle einen JSON-Objekt
+mit den Keys „Vorname, 
+Nachname, Alter, Wohnort“
+✓ Erstelle einen localStorage
+KEY mit dem Namen 
+„meineDaten“
+✓ Schreibe in den KEY 
+„meineDaten“ den JSONObjekt und benutze datebei
+JSON.stringify
+✓ Lese den KEY „meineDaten“ 
+aus dem localStorage und 
+benutze datei JSON.parse
+✓ Gib das Ergebnis auf der 
+Konsole aus
+    ------------------->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Übung 2</title>
+  </head>
+  <body>
+    <main></main>
+  </body>
+  <script>
+    const m = document.getElementsByTagName("main")[0];
+    // JSON-Objekt erstellen
+    const meineDaten = {
+      Vorname: "Max",
+      Nachname: "Mustermann",
+      Alter: 30,
+      Wohnort: "Musterstadt"
+    };
+    // تحويل كائن JSON إلى سلسلة وتخزينه في localStorage
+    // JSON-Objekt in einen String umwandeln und im localStorage speichern
+    localStorage.setItem("mDaten", JSON.stringify(meineDaten));
+    // قراءة كائن JSON من localStorage وتحويله إلى كائن JavaScript
+    // JSON-Objekt aus dem localStorage lesen und in ein JavaScript-Objekt umwandeln
+    const gespeicherteDatenJSON = localStorage.getItem("mDaten");
+    const gespeicherteDaten = JSON.parse(gespeicherteDatenJSON);
+
+    // Ergebnis auf der Konsole ausgeben
+    console.log(gespeicherteDaten);
+  </script>
+</html>

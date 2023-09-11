@@ -1,0 +1,88 @@
+
+<!--------- Übung 4
+    Erstelle zwei Input-Felder für Vorname und Nachname, einen InputFeld für Gebutsdatum und 
+einen Input-Feld für Augenfarbe
+✓ Erstelle einen Button für Speichern, der eine Funktion mit dem Namen 
+„hochladen“ ausführt
+✓ Wenn man auf den Button klickt, so sollen die InputFeld-Werte in ein JSON 
+geschrieben werden und der JSON in den localStorage
+
+✓ Gleichzeitig musst du eine DIV haben, die beim LADEN 
+der Seite, den Inhalt aus dem localStorage automatisch ladet
+    ------------->
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Übung 4</title>
+  </head>
+  <body>
+    <h1>Benutzerinformationen</h1>
+    <!-- Input-Felder für Vorname, Nachname, Geburtsdatum und Augenfarbe -->
+    <label for="vorname">Vorname:</label>
+    <input type="text" id="vorname" /><br />
+
+    <label for="nachname">Nachname:</label>
+    <input type="text" id="nachname" /><br />
+
+    <label for="geburtsdatum">Geburtsdatum:</label>
+    <input type="text" id="geburtsdatum" /><br />
+
+    <label for="augenfarbe">Augenfarbe:</label>
+    <input type="text" id="augenfarbe" /><br />
+
+    <!-- Speichern-Button -->
+    <button onclick="hochladen()">Speichern</button>
+
+    <!-- Anzeige-DIV für die gespeicherten Informationen -->
+    <div id="anzeige"></div>
+
+    <script>
+      // Funktion zum Speichern der Daten in den localStorage
+      function hochladen() {
+        // Daten aus den Input-Feldern erfassen
+        const vorname = document.getElementById("vorname").value;
+        const nachname = document.getElementById("nachname").value;
+        const geburtsdatum = document.getElementById("geburtsdatum").value;
+        const augenfarbe = document.getElementById("augenfarbe").value;
+
+        // Ein JSON-Objekt erstellen
+        const benutzerInfo = {
+          Vorname: vorname,
+          Nachname: nachname,
+          Geburtsdatum: geburtsdatum,
+          Augenfarbe: augenfarbe
+        };
+
+        // JSON in den localStorage speichern
+        localStorage.setItem("benutzerInfo", JSON.stringify(benutzerInfo));
+
+        // Anzeige aktualisieren
+        zeigeBenutzerInfo();
+      }
+
+      // Funktion zum Anzeigen der gespeicherten Informationen aus dem localStorage
+      function zeigeBenutzerInfo() {
+           // قراءة كائن JSON من localStorage وتحويله إلى كائن JavaScript
+    // JSON-Objekt aus dem localStorage lesen und in ein JavaScript-Objekt umwandeln
+        const benutzerInfoJSON = localStorage.getItem("benutzerInfo");
+        if (benutzerInfoJSON) {
+          const benutzerInfo = JSON.parse(benutzerInfoJSON);
+          const anzeigeDiv = document.getElementById("anzeige");
+          anzeigeDiv.innerHTML = `
+                    <h2>Gespeicherte Benutzerinformationen:</h2>
+                    <p>Vorname: ${benutzerInfo.Vorname}</p>
+                    <p>Nachname: ${benutzerInfo.Nachname}</p>
+                    <p>Geburtsdatum: ${benutzerInfo.Geburtsdatum}</p>
+                    <p>Augenfarbe: ${benutzerInfo.Augenfarbe}</p>
+                `;
+        }
+      }
+
+      // Beim Laden der Seite die gespeicherten Informationen anzeigen
+      window.onload = zeigeBenutzerInfo;
+    </script>
+  </body>
+</html>
